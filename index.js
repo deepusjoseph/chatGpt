@@ -8,10 +8,6 @@ const axios = require('axios');
 const fs = require('fs');
 const PDFDocument = require('pdfkit');
 
-
-const OPENAI_API_KEY = "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"
-
-
 // View Engine Setup
 app.set("views", path.join(__dirname, "views"))
 app.set("view engine", "ejs")
@@ -59,7 +55,6 @@ async function ask_question(question) {
 
     });
     const answer = completion.data.choices[0].text.trim();
-    console.log(completion.data.choices);
     return answer;
 }
 async function generate_document(multerText, answers) {
@@ -86,6 +81,20 @@ async function generate_document(multerText, answers) {
     const mimetype = 'application/pdf';
     return { filename, mimetype };
 }
+app.get("/download/", (req, res) => {
+    const filePath = __dirname + "/questions.txt";
+    res.download(
+        filePath,
+        "questions.txt",
+        (err) => {
+            if (err) {
+                res.send({
+                    error: err,
+                    msg: "Problem downloading the file"
+                })
+            }
+        });
+});
 app.listen(8080, function (error) {
     if (error) throw error
     console.log("Server created Successfully on PORT 8080")
