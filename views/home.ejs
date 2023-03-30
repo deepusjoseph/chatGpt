@@ -11,8 +11,10 @@
     <form action="/uploadFile" 
       enctype="multipart/form-data" method="POST">
       
-        <span>Please Upload a file asking question from ChatGpt:</span>  
+        <span>Please Upload a transcript file for a video:</span>  
         <input type="file" name="mypic" required/> <br>
+        <p><label for="include">Please give me a list of section headings for a detailed video script. you may also wish to include:</label></p>
+        <textarea id="include" name="include" rows="4" cols="50" required></textarea>
         <input type="submit" value="submit"> 
     </form>
     <a href="http://localhost:8080/download">
