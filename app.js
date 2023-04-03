@@ -57,12 +57,11 @@ app.post("/uploadFile", upload.single("mypic"), async (req, res, next) => {
     for (let question of questionSet1) {
         answerSet1 = await ask_question(question);
         // ans.push(answer);
-    }
+    }  
     var answerSet1Array = [];
     answerSet1Array.push(answerSet1)
     answerSet1Array.shift();
     const answerSet1ArrayPro = answerSet1.split('\n').filter(item => item.trim() !== '').map(item => item.replace(/^\d+\.\s+/, ''));
-
     // let section_answer
     for (let question of answerSet1ArrayPro) {
         section_answer = await section_details(question, fileInfo[0]);
@@ -71,62 +70,84 @@ app.post("/uploadFile", upload.single("mypic"), async (req, res, next) => {
         doc.font('Helvetica').fontSize(12).text(section_answer, { indent: 20 });
         doc.moveDown();
     }
+    for (let i = 3; i < 10; i++) {
+        let questionArray = [];
+        questionArray.push(answerSet1, fileInfo[i])
+        var answerSet2 = await ask_question(questionArray)
+        doc.font('Helvetica-Bold').fontSize(14).text(fileInfo[i]);
+        doc.font('Helvetica').fontSize(12).text(answerSet2, { indent: 20 });
+        doc.moveDown();
+
+    }
 
     //B-Roll Footage
-    let bRollFootage = [];
-    bRollFootage.push(answerSet1, fileInfo[3])
-    var answerSet2 = await ask_question(bRollFootage)
-    doc.font('Helvetica-Bold').fontSize(14).text(fileInfo[3]);
-    doc.font('Helvetica').fontSize(12).text(answerSet2, { indent: 20 });
-    doc.moveDown();
+    // let bRollFootage = [];
+    // bRollFootage.push(answerSet1, fileInfo[3])
+    // var answerSet2 = await ask_question(bRollFootage)
+    // doc.font('Helvetica-Bold').fontSize(14).text(fileInfo[3]);
+    // doc.font('Helvetica').fontSize(12).text(answerSet2, { indent: 20 });
+    // doc.moveDown();
 
-    //Summary
-    let summary = [];
-    summary.push(answerSet1, fileInfo[4])
-    var answerSet2 = await ask_question(summary)
-    doc.font('Helvetica-Bold').fontSize(14).text(fileInfo[4]);
-    doc.font('Helvetica').fontSize(12).text(answerSet2, { indent: 20 });
-    doc.moveDown();
+    // //Summary
+    // let summary = [];
+    // summary.push(answerSet1, fileInfo[4])
+    // var answerSet2 = await ask_question(summary)
+    // doc.font('Helvetica-Bold').fontSize(14).text(fileInfo[4]);
+    // doc.font('Helvetica').fontSize(12).text(answerSet2, { indent: 20 });
+    // doc.moveDown();
 
-    //tags
-    let tags = [];
-    tags.push(answerSet1, fileInfo[5])
-    var answerSet2 = await ask_question(tags)
-    doc.font('Helvetica-Bold').fontSize(14).text(fileInfo[5]);
-    doc.font('Helvetica').fontSize(12).text(answerSet2, { indent: 20 });
-    doc.moveDown();
-    //titles
-    let titles = [];
-    titles.push(answerSet1, fileInfo[6])
-    var answerSet2 = await ask_question(titles)
-    doc.font('Helvetica-Bold').fontSize(14).text(fileInfo[6]);
-    doc.font('Helvetica').fontSize(12).text(answerSet2, { indent: 20 });
-    doc.moveDown();
+    // //tags
+    // let tags = [];
+    // tags.push(answerSet1, fileInfo[5])
+    // var answerSet2 = await ask_question(tags)
+    // doc.font('Helvetica-Bold').fontSize(14).text(fileInfo[5]);
+    // doc.font('Helvetica').fontSize(12).text(answerSet2, { indent: 20 });
+    // doc.moveDown();
+    // //titles
+    // let titles = [];
+    // titles.push(answerSet1, fileInfo[6])
+    // var answerSet2 = await ask_question(titles)
+    // doc.font('Helvetica-Bold').fontSize(14).text(fileInfo[6]);
+    // doc.font('Helvetica').fontSize(12).text(answerSet2, { indent: 20 });
+    // doc.moveDown();
 
-    //catchyTitles
-    let catchyTitles = [];
-    catchyTitles.push(answerSet1, fileInfo[7])
-    var answerSet2 = await ask_question(catchyTitles)
-    doc.font('Helvetica-Bold').fontSize(14).text(fileInfo[7]);
-    doc.font('Helvetica').fontSize(12).text(answerSet2, { indent: 20 });
-    doc.moveDown();
+    // //catchyTitles
+    // let catchyTitles = [];
+    // catchyTitles.push(answerSet1, fileInfo[7])
+    // var answerSet2 = await ask_question(catchyTitles)
+    // doc.font('Helvetica-Bold').fontSize(14).text(fileInfo[7]);
+    // doc.font('Helvetica').fontSize(12).text(answerSet2, { indent: 20 });
+    // doc.moveDown();
 
-    //phrases
-    let phrases = [];
-    phrases.push(answerSet1, fileInfo[8])
-    var answerSet2 = await ask_question(phrases)
-    doc.font('Helvetica-Bold').fontSize(14).text(fileInfo[8]);
-    doc.font('Helvetica').fontSize(12).text(answerSet2, { indent: 20 });
-    doc.moveDown();
+    // //phrases
+    // let phrases = [];
+    // phrases.push(answerSet1, fileInfo[8])
+    // var answerSet2 = await ask_question(phrases)
+    // doc.font('Helvetica-Bold').fontSize(14).text(fileInfo[8]);
+    // doc.font('Helvetica').fontSize(12).text(answerSet2, { indent: 20 });
+    // doc.moveDown();
 
 
-    //thumbnails
-    let thumbnails = [];
-    thumbnails.push(answerSet1, fileInfo[9])
-    var answerSet2 = await ask_question(thumbnails)
-    doc.font('Helvetica-Bold').fontSize(14).text(fileInfo[9]);
-    doc.font('Helvetica').fontSize(12).text(answerSet2, { indent: 20 });
-    doc.moveDown();
+    // //thumbnails
+    // let thumbnails = [];
+    // thumbnails.push(answerSet1, fileInfo[9])
+    // var answerSet2 = await ask_question(thumbnails)
+    // doc.font('Helvetica-Bold').fontSize(14).text(fileInfo[9]);
+    // doc.font('Helvetica').fontSize(12).text(answerSet2, { indent: 20 });
+    // doc.moveDown();
+
+    //Images
+    // const thumbnailIdeas = answerSet2.split('\n').filter(item => item.trim() !== '').map(item => item.replace(/^\d+\.\s+/, '')).slice(0, 3);
+    // console.log(thumbnailIdeas, 'jsdhjs')
+    // const prompt = thumbnailIdeas.join("\n");
+    // console.log(prompt, 'ans')
+    // doc.font('Helvetica-Bold').fontSize(14).text(fileInfo[9]);
+    // thumbnailIdeas.map(async (item) => {
+    //     var images = await image_generation(item);
+    //     console.log(images, 'ima')
+    //     doc.font('Helvetica').fontSize(10).text('Image',{link: images,underline: true});
+    //     doc.moveDown();
+    // })
     doc.end();
     await new Promise(resolve => {
         doc.on('end', resolve);
@@ -167,6 +188,17 @@ async function section_details(question, trainingSet) {
     answer = answer.replace('\n', '')
     return answer;
 }
+async function image_generation(prompt) {
+    console.log(prompt, 'pro')
+    const response = await openai.createImage({
+        prompt: prompt,
+        n: 1,
+        size: "1024x1024",
+    });
+    // console.log(response,'rers')
+    console.log(response.data.data, 'sduisud')
+    return response.data.data['0'].url;
+};
 app.listen(8080, function (error) {
     if (error) throw error
     console.log("Server created Successfully on PORT 8080")
